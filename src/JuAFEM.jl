@@ -31,6 +31,7 @@ include("utils.jl")
 
 # Interpolations
 include("interpolations.jl")
+include("surf_interpolations.jl")
 
 # Quadrature
 include("Quadrature/quadrature.jl")
@@ -40,6 +41,7 @@ include("FEValues/cell_values.jl")
 include("FEValues/face_values.jl")
 include("FEValues/common_values.jl")
 include("FEValues/face_integrals.jl")
+include("FEValues/interface_values.jl")
 
 # Grid
 include(joinpath("Grid", "grid.jl"))

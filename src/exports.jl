@@ -6,6 +6,9 @@ export
     Lagrange,
     Serendipity,
     getnbasefunctions,
+# Surface interpolations
+    SurfaceInterpolation,
+    CohesiveZone,
 
 # Quadrature
     QuadratureRule,
@@ -21,6 +24,7 @@ export
     FaceValues,
     FaceScalarValues,
     FaceVectorValues,
+    SurfaceVectorValues,
     reinit!,
     shape_value,
     shape_gradient,

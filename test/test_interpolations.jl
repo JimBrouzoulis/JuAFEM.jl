@@ -40,3 +40,24 @@ for interpolation in (Lagrange{1, RefCube, 1}(),
 end
 
 end
+
+function test_cz_interp()
+
+    dim_s = 2
+    interpolation = CohesiveZone{1,RefCube,1,dim_s}()
+    ndim = JuAFEM.getdim(interpolation)
+    r_shape = JuAFEM.getrefshape(interpolation)
+    func_order = JuAFEM.getorder(interpolation)
+    @test typeof(interpolation) <: SurfaceInterpolation{ndim,r_shape,func_order,dim_s}
+
+    n_basefuncs = getnbasefunctions(interpolation)
+    x = rand(Tensor{1, ndim})
+    f = (x) -> JuAFEM.value(interpolation, Tensor{1, ndim}(x))
+    @test vec(ForwardDiff.jacobian(f, Array(x))') ≈
+           reinterpret(Float64, JuAFEM.derivative(interpolation, x))
+    @test sum(JuAFEM.value(interpolation, x)) ≈ 0.0
+end
+
+@testset "Cohesive zone interpolations" begin
+    test_cz_interp()
+end
