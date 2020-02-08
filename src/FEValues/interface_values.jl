@@ -99,7 +99,7 @@ function reinit!(cv::SurfaceVectorValues{dim,dim_s}, x::AbstractVector{Vec{dim_s
         G[:,2] = [-fecv_J[2], fecv_J[1]]
         cv.covar_base[i] = Tensor{2,dim_s,T}(G)
         detJ = sqrt(det(cv.covar_base[i]))
-        cv.detJdA[i] = detJ * w # change to ds
+        cv.detJdA[i] = detJ * w
 
     end
 end
@@ -107,7 +107,6 @@ end
 
 function function_value(fe_v::SurfaceVectorValues{dim,dim_s}, q_point::Int, u::AbstractVector{T}, dof_range::UnitRange = 1:length(u)) where {dim,T,dim_s}
     n_base_funcs = JuAFEM.getn_scalarbasefunctions(fe_v)
-    # isa(fe_v, VectorValues) && (n_base_funcs *= dim)
     n_base_funcs *= dim_s
     @assert length(dof_range) == n_base_funcs
     @boundscheck checkbounds(u, dof_range)

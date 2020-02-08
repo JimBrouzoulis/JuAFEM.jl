@@ -21,7 +21,7 @@ function value(ip::CohesiveZone{1,RefCube,1,dim_s}, i::Int, ξ::Vec{1}) where {d
     """
     Shape function values are defined such that ∑ Nᵢ(ξ) * aᵢ = j(ξ) (spatial jump)
     Note: current node numbering is:
-    3__________4
+    4__________3
     |          |
     |__________|
     1          2
@@ -29,8 +29,8 @@ function value(ip::CohesiveZone{1,RefCube,1,dim_s}, i::Int, ξ::Vec{1}) where {d
     ξ_x = ξ[1]
     i == 1 && return -(1 - ξ_x) * 0.5
     i == 2 && return -(1 + ξ_x) * 0.5
-    i == 3 && return (1 - ξ_x) * 0.5
-    i == 4 && return (1 + ξ_x) * 0.5
+    i == 3 && return (1 + ξ_x) * 0.5
+    i == 4 && return (1 - ξ_x) * 0.5
     throw(ArgumentError("no shape function $i for interpolation $ip"))
 end
 
@@ -38,7 +38,7 @@ function mid_surf_value(ip::CohesiveZone{1,RefCube,1,dim_s}, i::Int, ξ::Vec{1})
     """
     Shape function values are defined such that ∑ Nᵢ(ξ) * xᵢ = x̄(ξ) (mid-surface)
     Note: current node numbering is:
-    3__________4
+    4__________3
     |          |
     |__________|
     1          2
@@ -46,7 +46,7 @@ function mid_surf_value(ip::CohesiveZone{1,RefCube,1,dim_s}, i::Int, ξ::Vec{1})
     ξ_x = ξ[1]
     i == 1 && return (1 - ξ_x) * 0.25
     i == 2 && return (1 + ξ_x) * 0.25
-    i == 3 && return (1 - ξ_x) * 0.25
-    i == 4 && return (1 + ξ_x) * 0.25
+    i == 3 && return (1 + ξ_x) * 0.25
+    i == 4 && return (1 - ξ_x) * 0.25
     throw(ArgumentError("no shape function $i for interpolation $ip"))
 end

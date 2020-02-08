@@ -2,8 +2,8 @@ function test_surfacevectorvalues()
     x = [
         Vec{2,Float64}((0.0, 0.0)),
         Vec{2,Float64}((6.0, 0.0)),
-        Vec{2,Float64}((0.0, 1.0)),
         Vec{2,Float64}((6.0, 1.0)),
+        Vec{2,Float64}((0.0, 1.0)),
         ]
     func_interpol = CohesiveZone{1,RefCube,1,2}()
     quad_rule = QuadratureRule{1,RefCube}(:lobatto,2)
@@ -19,7 +19,7 @@ function test_surfacevectorvalues()
 
     # Test computation of the jump vector
     u_vector = [2., 0., 3., 0.,
-                4., 3., 4., 5.]
+                4., 5., 4., 3.]
 
     val_qp1 = function_value(cv, 1, u_vector)
     @test val_qp1[1] ≈ 2.0
